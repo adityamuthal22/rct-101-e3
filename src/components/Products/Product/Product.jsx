@@ -1,13 +1,25 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Product = () => {
+ const [data,setData]=useState([]);
+
+ useEffect(()=>{
+   axios({
+     url:" http://localhost:8080/products",
+     method:"GET"
+   })
+   .then((res)=>setData(res,data));
+ },[])
   // Note: this id should come from api
   const product = { id: 1 };
   return (
     <div data-cy={`product-${product.id}`}>
-      <h3 data-cy="product-name"></h3>
-      <h6 data-cy="product-description"></h6>
-      <button data-cy="product-add-item-to-cart-button"></button>
+      <h1>Products</h1>
+   
+     <h3 data-cy="product-name">Name:</h3>
+ <h6 data-cy="product-description"></h6>
+ <button data-cy="product-add-item-to-cart-button"></button>
       <div>
         <button data-cy="product-increment-cart-item-count-button"></button>
         <span data-cy="product-count">
